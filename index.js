@@ -1,21 +1,15 @@
-const express = require('express');
-const createTables = require('./createTables.js');
+const express = require("express");
+const userRoutes = require("./routes/userRoutes");
+const busRoutes = require("./routes/busRoutes");
 
 const app = express();
-const PORT = 3000;
-
 app.use(express.json());
 
-// Optional route to trigger table creation
-app.get('/create-tables', async (req, res) => {
-  try {
-    await createTables();
-    res.send("Tables created successfully.");
-  } catch (err) {
-    res.status(500).send("Error creating tables.");
-  }
-});
+// Routes
+app.use("/", userRoutes);
+app.use("/", busRoutes);
 
+const PORT = 5000; 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

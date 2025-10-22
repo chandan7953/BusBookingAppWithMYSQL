@@ -1,8 +1,8 @@
-const pool = require('./db.js');
+const db = require('./utils/db');
 
 async function createTables() {
   try {
-    await pool.query(`
+    await db.query(`
       CREATE TABLE IF NOT EXISTS Users (
         id INT PRIMARY KEY,
         name VARCHAR(100),
@@ -11,7 +11,7 @@ async function createTables() {
     `);
 
     // Buses Table
-    await pool.query(`
+    await db.query(`
       CREATE TABLE IF NOT EXISTS Buses (
         id INT PRIMARY KEY,
         busNumber VARCHAR(50),
@@ -21,7 +21,7 @@ async function createTables() {
     `);
 
     // Bookings Table
-    await pool.query(`
+    await db.query(`
       CREATE TABLE IF NOT EXISTS Bookings (
         id INT PRIMARY KEY,
         seatNumber INT
@@ -29,7 +29,7 @@ async function createTables() {
     `);
 
     // Payments Table
-    await pool.query(`
+    await db.query(`
       CREATE TABLE IF NOT EXISTS Payments (
         id INT PRIMARY KEY,
         amountPaid DECIMAL(10,2),
